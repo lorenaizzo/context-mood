@@ -1,25 +1,29 @@
-import logo from './logo.svg';
+import React, {useState} from 'react';
 import './App.css';
+import { MoodForm, MoodList } from './components/mood';
+import { MoodContext } from './MoodContext';
+
 
 function App() {
+  const [moods, setMoods] = useState([]);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+
+    <MoodContext.Provider 
+    value={{
+      moods: moods, 
+      handleMoodsChange: (value) => setMoods(value)
+    }}>
+      <div>
+        <div>
+          <MoodForm></MoodForm>
+        </div>
+        <div>
+          <MoodList></MoodList>
+        </div>
+      </div>
+    </MoodContext.Provider>
+    );
 }
 
 export default App;
